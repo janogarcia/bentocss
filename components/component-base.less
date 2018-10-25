@@ -242,7 +242,7 @@
 }
 
 & when (@base-enable-links = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .mixin(base-links)
     }
 }
@@ -360,7 +360,7 @@
 }
 
 & when (@base-enable-text-semantics = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .mixin(base-text-semantics)
     }
 }
@@ -404,7 +404,7 @@
 }
 
 & when (@base-enable-images = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .mixin(base-images)
     }
 }
@@ -487,13 +487,13 @@
 }
 
 & when (@base-enable-margin = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .mixin(base-margin)
     }
 }
 
 & when (@base-enable-margin-top = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .baseline-margin-top(@base-margin-vertical);
     }
 }
@@ -519,7 +519,7 @@
 }
 
 & when (@base-enable-headings = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .mixin(base-headings)
     }
 }
@@ -527,7 +527,7 @@
 // Margins
 
 & when (@base-enable-margin-top = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .baseline-margin-top-headings(@base-heading-margin-top);
     }
 }
@@ -574,7 +574,7 @@
 }
 
 & when (@base-enable-headings-size = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .mixin(base-headings-size)
     }
 }
@@ -590,7 +590,7 @@
 }
 
 & when (@base-enable-lists = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .mixin(base-lists)
     }
 }
@@ -623,7 +623,7 @@
 }
 
 & when (@base-enable-tables = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .mixin(base-tables)
     }
 }
@@ -727,7 +727,7 @@
 }
 
 & when (@base-enable-blocks = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .mixin(base-blocks)
     }
 }
@@ -745,7 +745,7 @@
 }
 
 & when (@base-enable-frames = true) {
-    @{base-local-ns} {
+    & @{base-local-ns} {
         .mixin(base-frames)
     }
 }
