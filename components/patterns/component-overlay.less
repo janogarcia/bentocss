@@ -141,8 +141,8 @@
 & when (@overlay-enable-modifier-transitions = true) {
 
     .@{overlay-ns}overlay__cover--fade,
-    [class^='@{overlay-ns}overlay__cover--slide-'],
-    [class*=' @{overlay-ns}overlay__cover--slide-'] {
+    [class^="@{overlay-ns}overlay__cover--slide-"],
+    [class*=" @{overlay-ns}overlay__cover--slide-"] {
         transition-duration: @overlay-transition-duration;
         transition-timing-function: @overlay-transition-easing;
         transition-property: opacity, transform;
@@ -194,8 +194,8 @@
         }
     }
     
-    .@{overlay-ns}overlay:hover [class^='@{overlay-ns}overlay__cover--slide-'],
-    .@{overlay-ns}overlay:hover [class*=' @{overlay-ns}overlay__cover--slide-'] {
+    .@{overlay-ns}overlay:hover [class^="@{overlay-ns}overlay__cover--slide-"],
+    .@{overlay-ns}overlay:hover [class*=" @{overlay-ns}overlay__cover--slide-"] {
         transform: translateX(0) translateY(0);
     }
 

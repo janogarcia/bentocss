@@ -1,0 +1,313 @@
+// Name:            Flexbox grid
+// Description:     Provides a flexbox-based responsive and nestable grid
+//
+// Namespace:       `flexgrid`
+//                  `flexgrid-divider`
+//
+// Sub-objects:     `flexgrid__cell`
+//
+// Modifiers:       `flexgrid--gap-0`
+//                  `flexgrid--gap-sm`
+//                  `flexgrid--gap-md`
+//                  `flexgrid--auto`
+//                  `flexgrid--divider`
+//                  `flexgrid--match`
+//
+// Dependencies:    vars-base
+//                  tool-responsive
+//
+// Uses:            Layout: `width-*`
+//                  Flex: `flex-*` for alignment
+//
+// Markup:
+//
+// <!-- flexgrid -->
+// <div class="flexgrid">
+//     <div class="flexgrid__cell width-1-2"></div>
+//     <div class="flexgrid__cell width-1-2"></div>
+// </div>
+//
+// <!-- flexgrid--divider -->
+// <div class="flexgrid flexgrid--divider">
+//     <div class="flexgrid__cell width-1-2"></div>
+//     <div class="flexgrid__cell width-1-2"></div>
+// </div>
+// <hr class="flexgrid-divider">
+// <div class="flexgrid flexgrid--divider">
+//     <div class="flexgrid__cell width-1-2"></div>
+//     <div class="flexgrid__cell width-1-2"></div>
+// </div>
+//
+// Based on:
+//
+// https://github.com/uikit/uikit/blob/v2.17.0/src/less/core/grid.less
+// https://github.com/suitcss/components-grid/blob/2.0.2/lib/grid.css
+// https://github.com/zurb/foundation/blob/v5.5.1/scss/foundation/components/_block-grid.scss
+//
+// Notes:
+//
+// Makes use of child combinator `>` to allow for component nesting.
+//
+// Parent modifiers (indirect) such as `.flexgrid--gap-0 > .flexgrid__cell`
+// could be replaced by less convenient per-child modifiers (direct)
+// `.flexgrid__cell--collapse`.
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@flexgrid-ns:                                       @ns;
+
+@flexgrid-enable-modifier-divider:                  false;
+@flexgrid-enable-modifier-match:                    false;
+
+@flexgrid-gap-horizontal:                           @base-gap;
+@flexgrid-gap-vertical:                             @base-gap;
+
+@flexgrid-gap-modifiers-breakpoints:                false;
+
+@flexgrid-gap-large-horizontal:                     @base-gap-large;
+@flexgrid-gap-large-vertical:                       @base-gap-large;
+
+@flexgrid-gap-small-horizontal:                     @base-gap-small;
+@flexgrid-gap-small-vertical:                       @base-gap-small;
+
+@flexgrid-divider-breakpoint:                       @breakpoint-xlarge;
+
+@flexgrid-divider-border:                           @base-color-border;
+@flexgrid-divider-border-width:                     @base-border-width;
+
+
+// ========================================================================
+// Component: Flexgrid
+// ========================================================================
+
+// 1. Makes flexgrid more robust so that it can be used with other block elements like lists
+
+.@{flexgrid-ns}flexgrid {
+    display: flex;
+    flex-wrap: wrap;
+    // 1
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+// Flexgrid cell
+// 1. Makes flexgrid more robust so that it can be used with other block elements
+// 2. Space is allocated solely based on content dimensions
+
+.@{flexgrid-ns}flexgrid__cell {
+    box-sizing: border-box;
+    // 1
+    margin: 0;
+    padding: 0;
+}
+
+.@{flexgrid-ns}flexgrid > .@{flexgrid-ns}flexgrid__cell {
+    // 2
+    flex: none;
+}
+
+// Remove margin from the last-child
+ 
+.@{flexgrid-ns}flexgrid__cell > :last-child { margin-bottom: 0; }
+
+
+// Flexgrid gap
+// ========================================================================
+
+// Default gap
+
+// Horizontal
+.@{flexgrid-ns}flexgrid { margin-@{start}: -@flexgrid-gap-horizontal; }
+
+.@{flexgrid-ns}flexgrid > .@{flexgrid-ns}flexgrid__cell { padding-@{start}: @flexgrid-gap-horizontal; }
+
+// Vertical
+.@{flexgrid-ns}flexgrid > .@{flexgrid-ns}flexgrid__cell { margin-bottom: @flexgrid-gap-vertical; }
+
+.@{flexgrid-ns}flexgrid.@{flexgrid-ns}flexgrid--m-b-0 { margin-bottom: -@flexgrid-gap-vertical; }    
+
+// Collapse gap
+
+// Horizontal
+.@{flexgrid-ns}flexgrid--gap-0 { margin-@{start}: 0; }
+.@{flexgrid-ns}flexgrid--gap-0 > .@{flexgrid-ns}flexgrid__cell { padding-@{start}: 0; }
+
+// Vertical
+.@{flexgrid-ns}flexgrid--gap-0 > .@{flexgrid-ns}flexgrid__cell { margin-bottom: 0; }
+
+& { .hook-flexgrid-gap; }
+
+
+// gap modifiers
+
+.mixin(flexgrid-gap-modifiers) {    
+
+    // Small gap
+
+    // Horizontal
+    .@{flexgrid-ns}flexgrid--gap-sm@{breakpoint} { margin-@{start}: -@flexgrid-gap-small-horizontal; }
+    .@{flexgrid-ns}flexgrid--gap-sm@{breakpoint} > .@{flexgrid-ns}flexgrid__cell { padding-@{start}: @flexgrid-gap-small-horizontal; }
+
+    // Vertical
+    .@{flexgrid-ns}flexgrid--gap-sm@{breakpoint} > .@{flexgrid-ns}flexgrid__cell { margin-bottom: @flexgrid-gap-small-vertical; }                
+    .@{flexgrid-ns}flexgrid--gap-sm@{breakpoint}.@{flexgrid-ns}flexgrid--m-b-0 { margin-bottom: -@flexgrid-gap-small-vertical; }
+
+    // Medium gap
+
+    // Horizontal
+    .@{flexgrid-ns}flexgrid--gap-md@{breakpoint} { margin-@{start}: -@flexgrid-gap-horizontal; }
+    .@{flexgrid-ns}flexgrid--gap-md@{breakpoint} > .@{flexgrid-ns}flexgrid__cell { padding-@{start}: @flexgrid-gap-horizontal; }
+
+    // Vertical
+    .@{flexgrid-ns}flexgrid--gap-md@{breakpoint} > .@{flexgrid-ns}flexgrid__cell { margin-bottom: @flexgrid-gap-vertical; }
+    .@{flexgrid-ns}flexgrid--gap-md@{breakpoint}.@{flexgrid-ns}flexgrid--m-b-0 { margin-bottom: -@flexgrid-gap-vertical; }          
+}
+
+& when not (@flexgrid-gap-modifiers-breakpoints = false) {
+
+    .render-responsive-rulesets(@flexgrid-gap-modifiers-breakpoints; flexgrid-gap-modifiers);
+}
+
+
+// Modifier: `flexgrid--auto`
+// ========================================================================
+
+// Allow for auto sized flexgrid elements that shrink as expected
+// 1. Space is allocated solely based on content dimensions, but shrinks: 0 1 auto
+
+.@{flexgrid-ns}flexgrid--auto > .@{flexgrid-ns}flexgrid__cell {
+    // 1
+    flex: initial;
+}
+
+
+// Modifier: `flexgrid--divider`
+// ========================================================================
+
+& when (@flexgrid-enable-modifier-divider = true) {
+
+    // Cell divider
+    // Only works with the default gap. Does not work with gap collapse, small or large.
+    // Does not work with `push-*`, `pull-*` and not if the columns float into the next row.
+
+    .@{flexgrid-ns}flexgrid--divider {
+        margin-@{start}: -@flexgrid-gap-horizontal;
+        margin-@{end}: -@flexgrid-gap-horizontal;
+    }
+
+    .@{flexgrid-ns}flexgrid--divider > .@{flexgrid-ns}flexgrid__cell {
+        padding-@{start}: @flexgrid-gap-horizontal;
+        padding-@{end}: @flexgrid-gap-horizontal;
+    }
+
+    .@{flexgrid-ns}flexgrid--divider > .@{flexgrid-ns}flexgrid__cell:not(:first-child) { border-@{start}: @flexgrid-divider-border-width solid @flexgrid-divider-border; }
+
+    // Large screen and bigger
+    @media (min-width: @flexgrid-divider-breakpoint) {
+
+        // Large gap    
+
+        .@{flexgrid-ns}flexgrid--divider {
+            margin-@{start}: -@flexgrid-gap-large-horizontal;
+            margin-@{end}: -@flexgrid-gap-large-horizontal;
+        }
+
+        .@{flexgrid-ns}flexgrid--divider > .@{flexgrid-ns}flexgrid__cell {
+            padding-@{start}: @flexgrid-gap-large-horizontal;
+            padding-@{end}: @flexgrid-gap-large-horizontal;
+        }
+
+    }
+
+    // Row divider
+
+    .@{flexgrid-ns}flexgrid-divider {
+        margin-top: @flexgrid-gap-vertical;
+        margin-bottom: @flexgrid-gap-vertical;
+        border-top: @flexgrid-divider-border-width solid @flexgrid-divider-border;
+    }
+
+    // Large screen and bigger
+    @media (min-width: @flexgrid-divider-breakpoint) {
+
+        .@{flexgrid-ns}flexgrid-divider {
+            margin-top: @flexgrid-gap-large-vertical;
+            margin-bottom: @flexgrid-gap-large-vertical;
+        }
+
+    }
+}
+
+
+// Match cells' inner container height
+// ========================================================================
+
+& when (@flexgrid-enable-modifier-match = true) {
+
+    // Match column heights, but limited to a single row
+
+    .@{flexgrid-ns}flexgrid--match > .@{flexgrid-ns}flexgrid__cell {
+        display: flex;
+    }
+
+    // 1. Behave like a block element
+
+    .@{flexgrid-ns}flexgrid--match > .@{flexgrid-ns}flexgrid__cell > *:not(.@{flexgrid-ns}flexgrid) {
+        flex: none;
+        // 1
+        box-sizing: border-box;
+        width: 100%;
+    }
+
+    // Allow for nested flexgrids to take up the correct full width
+
+    .@{flexgrid-ns}flexgrid--match > .@{flexgrid-ns}flexgrid__cell > .@{flexgrid-ns}flexgrid {
+        flex: 1;
+    }
+
+    // Match row heights, but limited to a single column 
+    //   
+    // Notes:
+    //
+    // The parent element must be flex.
+    // Content overflow issues may happen, CSS Grid Layout should be preferred for those cases.
+
+    .@{flexgrid-ns}flexgrid--match-rows {
+        flex: 1;
+        flex-direction: column;
+    }
+
+    .@{flexgrid-ns}flexgrid--match-rows > .@{flexgrid-ns}flexgrid__cell {
+        display: flex;
+        flex: 1;
+    }
+
+    // 1. Behave like a block element
+
+    .@{flexgrid-ns}flexgrid--match-rows > .@{flexgrid-ns}flexgrid__cell > *:not(.@{flexgrid-ns}flexgrid) {
+        flex: none;
+        // 1
+        box-sizing: border-box;
+        width: 100%;
+    }           
+}
+
+
+// Alignment modifiers
+// ========================================================================
+
+// Use Flex horizontal alignment utilities
+
+
+// Hooks
+// ========================================================================
+
+& { .hook-flexgrid-misc; }
+
+.hook-flexgrid-gap() {}
+.hook-flexgrid-misc() {}

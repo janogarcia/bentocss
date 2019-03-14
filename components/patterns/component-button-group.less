@@ -1,5 +1,5 @@
 // Name:            Button
-// Description:     Extends `button` with custom button combos
+// Description:     Extends `button` with custom button groups
 //
 // Namespace:       `button`
 //
@@ -62,7 +62,7 @@
 
 
 // ========================================================================
-//   Component: Button combo
+//   Component: Button group
 // ========================================================================
 
 // Button group
@@ -76,12 +76,12 @@
 
     .@{button-ns}button-group {
         // 1 
-        display: inline-flex;
         align-items: center;
+        display: inline-flex;
         vertical-align: middle;
         // 2 
-        margin: 0;
         list-style: none;
+        margin: 0;
         padding: 0;
     }
 
@@ -172,7 +172,8 @@
 
     .@{button-ns}button-dropdown {
         // 1
-        display: inline-block;
+        align-items: center;
+        display: inline-flex;
         vertical-align: middle;
         // 2
         position: relative;

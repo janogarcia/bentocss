@@ -1,0 +1,79 @@
+// Name:            Container
+// Description:     Provides a generic responsive container
+//
+// Namespace:       `container`
+//
+// Sub-objects:     (none)
+//
+// Modifiers:       (none)
+//
+// Dependencies:    vars-base
+//
+// Markup:
+//
+// <!-- container -->
+// <div class="container">
+// </div>
+//
+// ========================================================================
+
+
+// Variables
+// ========================================================================
+
+@container-ns:                             @ns;
+
+@container-breakpoint:                     @breakpoint-xlarge;
+
+@container-max-width:                      980/@px;
+@container-padding-horizontal:             @base-gap;
+
+@container-large-max-width:                1200/@px;
+@container-large-padding-horizontal:       @base-gap-large;
+
+
+// ========================================================================
+// Component: Container
+// ========================================================================
+
+.mixin(container-base; @is-centered: true) {
+    
+    box-sizing: border-box;
+    width: 100%;
+
+    & when (@is-centered = true) {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    // Micro clearfix to make container more robust
+    &::after {                
+        clear: both;
+        content: "";
+        display: block;
+    }    
+}
+
+.@{container-ns}container {
+    .mixin(container-base);
+    max-width: @container-max-width;
+    padding: 0 @container-padding-horizontal;
+}
+
+// Large screen and bigger
+@media (min-width: @container-breakpoint) {
+
+    .@{container-ns}container {
+        max-width: @container-large-max-width;
+        padding: 0 @container-large-padding-horizontal;
+    }
+
+}
+
+
+// Hooks
+// ========================================================================
+
+& { .hook-container-misc; }
+
+.hook-container-misc() {}

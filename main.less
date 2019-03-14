@@ -1,7 +1,3 @@
-// Style guide
-// https://gist.github.com/janogarcia/8c140ff9294a285830a0
-
-
 // Environment
 // ========================================================================
 
@@ -22,55 +18,40 @@
 .set-paths() when (@environment = development) {
     @assets-path: "";
 }
-.set-paths() when (@environment = production) {
-    @assets-path: "";
-}
 
 
 // Tools
 // ========================================================================
 
-@import "@{libs-path}utilities/tool-responsive.less";
+// @import "@{libs-path}utilities/tool-name.less";
 
 
 // Base
 // ========================================================================
 
-// Theme
 // @import "@{theme-path}fonts-theme-foo.less";
 
-// Base styles
 // @import "@{libs-path}components/component-base.less";
 
 
 // Components
 // ========================================================================
 
-// Layout (arranges content and every other component)
-// @import "@{libs-path}components/component-grid.less";
+// @import "@{libs-path}components/component-name.less";
 
-// Elements (base HTML elements)
-// @import "@{libs-path}components/component-button.less";
-
-// Common (reusable UI patterns)
-// @import "@{libs-path}components/component-nav.less";
-
-// Theme (app specific theme and UI patterns)
 // @import "@{theme-path}component-theme-foo.less";
 
 
 // Utilities
 // ========================================================================
 
-// @import "@{libs-path}utilities/util-layout-size.less";
+// @import "@{libs-path}utilities/util-name.less";
 
 
 // Vars
 // http://lesscss.org/features/#variables-feature-lazy-loading
 // ========================================================================
 
-// Base
 @import "@{libs-path}vars-base.less";
 
-// Theme
 // @import "@{theme-path}vars-theme-foo.less";
