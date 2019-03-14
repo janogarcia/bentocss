@@ -1,0 +1,15 @@
+{
+  "name": "bentocss",
+  "version": "4.0.0",
+  "description": "Tasty CSS, neatly organized.",
+  "author": "@janogarcia",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janogarcia/bentocss.git"
+  },
+  "bugs": {
+    "url": "https://github.com/janogarcia/bentocss/issues"
+  },
+  "homepage": "https://github.com/janogarcia/bentocss#readme"
+}
