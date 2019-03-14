@@ -19,9 +19,8 @@ Tasty CSS, neatly organized.
 
 ### Todo
 
-> Features thar are pending to be implemented.
+> Features that are pending to be implemented.
 
-- **License**. Choose one and add it to repo.
 - **Contributing**. Adopt semver and gitflow as described on [UIkit REAMDE.md](https://github.com/uikit/uikit/blob/de26176a504661a2cddb859f8b1c2c2a992fe914/README.md).
 - **Docs**. Markdown.
 
@@ -39,4 +38,3 @@ Optionally enable these features at component level:
 
 - **CSS custom properties**. Make some powerful declarative utilities combining CSS custom properties with `data-` attributes, `var()`, `attr()`, `calc()`... <https://googlechrome.github.io/samples/css-custom-properties/>
 - **CSS element/container queries**.
-- **CSS modules**. Also known as CSS in JS, Atomic CSS, depending on the context and implementation.
