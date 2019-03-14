@@ -51,7 +51,7 @@
 
     // Micro clearfix for children elements
 
-    .@{list-ns}clearfix-children > *::after {
+    .@{list-ns}clearfix-children > ::after {
         clear: both;
         content: "";
         display: block;
@@ -100,8 +100,8 @@
     // 1. Prevent content overflow on small devices
 
     // 1
-    [class^='@{float-ns}float-'],
-    [class*=' @{float-ns}float-'] { max-width: 100%; }
+    [class^="@{float-ns}float-"],
+    [class*=" @{float-ns}float-"] { max-width: 100%; }
 
     .render-responsive-rulesets(@float-floats-breakpoints; float-rulesets);
 }
